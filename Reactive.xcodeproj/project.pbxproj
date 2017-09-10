@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4507D7581F656331001DCCE2 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4507D7571F656331001DCCE2 /* Event.swift */; };
+		4507D75A1F656380001DCCE2 /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4507D7591F656380001DCCE2 /* Disposable.swift */; };
 		45124F2E1F655EF300A21AFA /* Reactive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45124F241F655EF200A21AFA /* Reactive.framework */; };
 		45124F331F655EF300A21AFA /* ReactiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45124F321F655EF300A21AFA /* ReactiveTests.swift */; };
 		45124F351F655EF300A21AFA /* Reactive.h in Headers */ = {isa = PBXBuildFile; fileRef = 45124F271F655EF200A21AFA /* Reactive.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,6 +25,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4507D7571F656331001DCCE2 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		4507D7591F656380001DCCE2 /* Disposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
 		45124F241F655EF200A21AFA /* Reactive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Reactive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45124F271F655EF200A21AFA /* Reactive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reactive.h; sourceTree = "<group>"; };
 		45124F281F655EF200A21AFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 		45124F3E1F655F0F00A21AFA /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				4507D7571F656331001DCCE2 /* Event.swift */,
+				4507D7591F656380001DCCE2 /* Disposable.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -156,6 +162,7 @@
 				TargetAttributes = {
 					45124F231F655EF200A21AFA = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 					45124F2C1F655EF300A21AFA = {
 						CreatedOnToolsVersion = 9.0;
@@ -202,6 +209,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4507D7581F656331001DCCE2 /* Event.swift in Sources */,
+				4507D75A1F656380001DCCE2 /* Disposable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +345,7 @@
 		45124F391F655EF300A21AFA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 6BDKUNMM63;
@@ -348,6 +358,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cn.beeth0ven.Reactive;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -356,6 +367,7 @@
 		45124F3A1F655EF300A21AFA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 6BDKUNMM63;
@@ -376,6 +388,7 @@
 		45124F3C1F655EF300A21AFA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 6BDKUNMM63;
 				INFOPLIST_FILE = ReactiveTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -389,6 +402,7 @@
 		45124F3D1F655EF300A21AFA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 6BDKUNMM63;
 				INFOPLIST_FILE = ReactiveTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -418,6 +432,7 @@
 				45124F3A1F655EF300A21AFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		45124F3B1F655EF300A21AFA /* Build configuration list for PBXNativeTarget "ReactiveTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +441,7 @@
 				45124F3D1F655EF300A21AFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
