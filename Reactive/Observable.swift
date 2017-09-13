@@ -13,12 +13,13 @@ public protocol HasObservable {
 }
 
 public protocol IsObservable: HasObservable {
-    func subscribe(_ observer: AnyObserver<E>) -> Disposable
+    func subscribe<O: IsObserver>(_ observer: O) -> Disposable where O.E == E
 }
 
 extension IsObservable {
+    
     public func asObservable() -> Observable<E> {
-        fatalError()
+        return AnyObservable.create(subscribe)
     }
 }
 
@@ -26,14 +27,14 @@ public class Observable<Element>: IsObservable {
     
     public typealias E = Element
     
-    public func subscribe(_ observer: AnyObserver<E>) -> Disposable {
+    public func subscribe<O: IsObserver>(_ observer: O) -> Disposable where O.E == E {
         fatalError("This is an abstract method.")
     }
 }
 
 class Producer<Element>: Observable<Element> {
     
-    override func subscribe(_ observer: AnyObserver<E>) -> Disposable {
+    override func subscribe<O: IsObserver>(_ observer: O) -> Disposable where O.E == E {
         let disposer = Disposer()
         let (sink, subscription) = run(observer, cancel: disposer)
         disposer.setSinkAndSubscription(sink: sink, subscription: subscription)

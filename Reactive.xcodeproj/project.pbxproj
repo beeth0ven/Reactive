@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4506F1951F696EF800E8ED30 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506F1941F696EF800E8ED30 /* Map.swift */; };
 		4507D7581F656331001DCCE2 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4507D7571F656331001DCCE2 /* Event.swift */; };
 		4507D75A1F656380001DCCE2 /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4507D7591F656380001DCCE2 /* Disposable.swift */; };
 		45124F2E1F655EF300A21AFA /* Reactive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45124F241F655EF200A21AFA /* Reactive.framework */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4506F1941F696EF800E8ED30 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		4507D7571F656331001DCCE2 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		4507D7591F656380001DCCE2 /* Disposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
 		45124F241F655EF200A21AFA /* Reactive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Reactive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +104,7 @@
 				4507D7591F656380001DCCE2 /* Disposable.swift */,
 				45BF21421F680F7500CEC66C /* Observable.swift */,
 				45BF21441F68127D00CEC66C /* Observer.swift */,
+				4506F1941F696EF800E8ED30 /* Map.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 					45124F231F655EF200A21AFA = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
 					};
 					45124F2C1F655EF300A21AFA = {
 						CreatedOnToolsVersion = 9.0;
@@ -215,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4506F1951F696EF800E8ED30 /* Map.swift in Sources */,
 				4507D7581F656331001DCCE2 /* Event.swift in Sources */,
 				45BF21451F68127D00CEC66C /* Observer.swift in Sources */,
 				45BF21431F680F7500CEC66C /* Observable.swift in Sources */,
@@ -355,6 +360,8 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 6BDKUNMM63;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -365,6 +372,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.beeth0ven.Reactive;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -377,6 +385,8 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 6BDKUNMM63;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -387,6 +397,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.beeth0ven.Reactive;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
