@@ -13,32 +13,35 @@ class ReactiveTests: XCTestCase {
     
     func testExample() {
         
-        let numbers: Observable<Int> = Observable.create { observer -> Disposable in
+        print("---------Before---------")
+        
+        let number = Observable<Int> { observer in
             observer.on(.next(0))
             observer.on(.next(1))
             observer.on(.next(2))
-            observer.on(.next(3))
-            observer.on(.next(4))
             observer.on(.completed)
-            observer.on(.next(5))
-            return Disposables.create {
-                print("on Dispose.")
+            observer.on(.next(3))
+            return Disposable {
+                print("Dispose")
             }
         }
         
-//        let doubled = map(numbers) { $0 * 2 }
-        
-        let disposable = numbers.subscribe(AnyObserver { event in
+        let observer = Observer<Int> { event in
             switch event {
             case .next(let value):
-                print("on Next:", value)
+                print("next:", value)
             case .error(let error):
-                print("on Error:", error)
+                print("error:", error)
             case .completed:
-                print("completed.")
+                print("completed")
             }
-        })
+        }
+        
+        let disposable = number.subscribe(observer)
         
         disposable.dispose()
+        
+        print("---------After---------")
+
     }
 }
