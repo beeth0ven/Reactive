@@ -10,9 +10,21 @@ import Foundation
 
 public class Disposable {
     
-    public let dispose: () -> Void
+    public var isDisposed = false
+    private var _dispose: () -> Void
+
+    public init(_ dispose: @escaping () -> Void = {}) {
+        _dispose = dispose
+    }
     
-    public init(_ dispose: @escaping () -> Void) {
-        self.dispose = dispose
+    public func dispose() {
+        guard !isDisposed else { return }
+        isDisposed = true
+        _dispose()
+    }
+    
+    public func setDispose(_ dispose: @escaping () -> Void) {
+        guard !isDisposed else { return dispose() }
+        _dispose = dispose
     }
 }

@@ -11,11 +11,11 @@ import XCTest
 
 class ReactiveTests: XCTestCase {
     
-    func testExample() {
+    func testSyncExample() {
         
-        print("---------Before---------")
+        print("---------Before testSyncExample---------")
         
-        let number = Observable<Int> { observer in
+        let observable = Observable<Int> { observer in
             observer.on(.next(0))
             observer.on(.next(1))
             observer.on(.next(2))
@@ -37,11 +37,49 @@ class ReactiveTests: XCTestCase {
             }
         }
         
-        let disposable = number.subscribe(observer)
+        let disposable = observable.subscribe(observer)
         
-        disposable.dispose()
+        //        disposable.dispose()
         
-        print("---------After---------")
-
+        print("---------After testSyncExample---------")
+        
+    }
+    
+    func testAsyncExample() {
+        
+        print("---------Before testAsyncExample---------")
+        
+        let observable = Observable<Int> { observer in
+            DispatchQueue.main.async {
+                print("---------Before testAsyncExample---------")
+                observer.on(.next(0))
+                observer.on(.next(1))
+                observer.on(.next(2))
+                observer.on(.completed)
+                observer.on(.next(3))
+                print("---------After testAsyncExample---------")
+            }
+            return Disposable {
+                print("Dispose")
+            }
+        }
+        
+        let observer = Observer<Int> { event in
+            switch event {
+            case .next(let value):
+                print("next:", value)
+            case .error(let error):
+                print("error:", error)
+            case .completed:
+                print("completed")
+            }
+        }
+        
+        let disposable = observable.subscribe(observer)
+        
+        //        disposable.dispose()
+        
+        print("---------After testAsyncExample---------")
+        
     }
 }
