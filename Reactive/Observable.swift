@@ -12,11 +12,11 @@ public class Observable<E> {
     
     public init(_ subscribe: @escaping (Observer<E>) -> Disposable) {
         
-        let _disposer = Disposable()
-        
-        self.subscribe = { [_disposer, subscribe] observer in
+        self.subscribe = { [subscribe] observer in
             
-            let _sink = Observer<E> { [observer] event in
+            let _disposer = Disposable()
+
+            let _disposable = subscribe(Observer { [observer] event in
                 guard !_disposer.isDisposed else { return }
                 switch event {
                 case .next(let element):
@@ -28,9 +28,8 @@ public class Observable<E> {
                     observer.on(.completed)
                     _disposer.dispose()
                 }
-            }
+            })
             
-            let _disposable = subscribe(_sink)
             _disposer.setDispose(_disposable.dispose)
             return _disposer
         }

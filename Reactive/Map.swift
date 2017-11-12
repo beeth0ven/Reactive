@@ -10,9 +10,9 @@ extension Observable {
     
     public func map<R>(_ transform: @escaping (E) -> R) -> Observable<R> {
         
-        let _mapProducer = Observable<R> { [source = self, transform] observer in
+        return Observable<R> { [source = self, transform] observer in
             
-            let _mapSink = Observer<E> { [transform, observer] event in
+            let _sourceDisposer = source.subscribe(Observer { [transform, observer] event in
                 switch event {
                 case .next(let element):
                     let mappedElement = transform(element)
@@ -22,13 +22,10 @@ extension Observable {
                 case .completed:
                     observer.on(.completed)
                 }
-            }
+            })
             
-            let _sourceDisposer = source.subscribe(_mapSink)
             return _sourceDisposer
         }
-        
-        return _mapProducer
     }
 }
 
