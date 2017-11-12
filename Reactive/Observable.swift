@@ -6,23 +6,21 @@
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
-import Foundation
-
 public class Observable<E> {
     
     public let subscribe: (Observer<E>) -> Disposable
     
-    init(_ subscribe: @escaping (Observer<E>) -> Disposable) {
+    public init(_ subscribe: @escaping (Observer<E>) -> Disposable) {
         
         let _disposer = Disposable()
         
-        self.subscribe = { observer in
+        self.subscribe = { [_disposer, subscribe] observer in
             
-            let _sink = Observer<E> { event in
+            let _sink = Observer<E> { [observer] event in
                 guard !_disposer.isDisposed else { return }
                 switch event {
-                case .next(let value):
-                    observer.on(.next(value))
+                case .next(let element):
+                    observer.on(.next(element))
                 case .error(let error):
                     observer.on(.error(error))
                     _disposer.dispose()
@@ -38,3 +36,5 @@ public class Observable<E> {
         }
     }
 }
+
+

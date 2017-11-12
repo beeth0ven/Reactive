@@ -15,21 +15,21 @@ class ReactiveTests: XCTestCase {
         
         print("---------Before testSyncExample---------")
         
-        let observable = Observable<Int> { observer in
-            observer.on(.next(0))
-            observer.on(.next(1))
-            observer.on(.next(2))
+        let observable = Observable<String> { observer in
+            observer.on(.next("Sync 0"))
+            observer.on(.next("Sync 1"))
+            observer.on(.next("Sync 2"))
             observer.on(.completed)
-            observer.on(.next(3))
+            observer.on(.next("Sync 3"))
             return Disposable {
                 print("Dispose")
             }
         }
         
-        let observer = Observer<Int> { event in
+        let observer = Observer<String> { event in
             switch event {
-            case .next(let value):
-                print("next:", value)
+            case .next(let element):
+                print("next:", element)
             case .error(let error):
                 print("error:", error)
             case .completed:
@@ -49,14 +49,14 @@ class ReactiveTests: XCTestCase {
         
         print("---------Before testAsyncExample---------")
         
-        let observable = Observable<Int> { observer in
+        let observable = Observable<String> { observer in
             DispatchQueue.main.async {
                 print("---------Before testAsyncExample---------")
-                observer.on(.next(0))
-                observer.on(.next(1))
-                observer.on(.next(2))
+                observer.on(.next("Async 0"))
+                observer.on(.next("Async 1"))
+                observer.on(.next("Async 2"))
                 observer.on(.completed)
-                observer.on(.next(3))
+                observer.on(.next("Async 3"))
                 print("---------After testAsyncExample---------")
             }
             return Disposable {
@@ -64,10 +64,10 @@ class ReactiveTests: XCTestCase {
             }
         }
         
-        let observer = Observer<Int> { event in
+        let observer = Observer<String> { event in
             switch event {
-            case .next(let value):
-                print("next:", value)
+            case .next(let element):
+                print("next:", element)
             case .error(let error):
                 print("error:", error)
             case .completed:

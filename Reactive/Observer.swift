@@ -6,8 +6,6 @@
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
-import Foundation
-
 public class Observer<E> {
     
     public let on: (Event<E>) -> Void
