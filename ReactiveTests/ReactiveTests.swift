@@ -11,34 +11,75 @@ import XCTest
 
 class ReactiveTests: XCTestCase {
     
-    func testExample() {
+    func testSyncExample() {
         
-        let numbers: Observable<Int> = Observable.create { observer -> Disposable in
-            observer.on(.next(0))
-            observer.on(.next(1))
-            observer.on(.next(2))
-            observer.on(.next(3))
-            observer.on(.next(4))
+        print("---------Before testSyncExample---------")
+        
+        let observable = Observable<String> { observer in
+            observer.on(.next("Sync 0"))
+            observer.on(.next("Sync 1"))
+            observer.on(.next("Sync 2"))
             observer.on(.completed)
-            observer.on(.next(5))
-            return Disposables.create {
-                print("on Dispose.")
+            observer.on(.next("Sync 3"))
+            return Disposable {
+                print("Dispose")
             }
         }
         
-//        let doubled = map(numbers) { $0 * 2 }
-        
-        let disposable = numbers.subscribe(AnyObserver { event in
+        let observer = Observer<String> { event in
             switch event {
-            case .next(let value):
-                print("on Next:", value)
+            case .next(let element):
+                print("next:", element)
             case .error(let error):
-                print("on Error:", error)
+                print("error:", error)
             case .completed:
-                print("completed.")
+                print("completed")
             }
-        })
+        }
         
-        disposable.dispose()
+        let disposable = observable.subscribe(observer)
+        
+        //        disposable.dispose()
+        
+        print("---------After testSyncExample---------")
+        
+    }
+    
+    func testAsyncExample() {
+        
+        print("---------Before testAsyncExample---------")
+        
+        let observable = Observable<String> { observer in
+            DispatchQueue.main.async {
+                print("---------Before testAsyncExample---------")
+                observer.on(.next("Async 0"))
+                observer.on(.next("Async 1"))
+                observer.on(.next("Async 2"))
+                observer.on(.completed)
+                observer.on(.next("Async 3"))
+                print("---------After testAsyncExample---------")
+            }
+            return Disposable {
+                print("Dispose")
+            }
+        }
+        
+        let observer = Observer<String> { event in
+            switch event {
+            case .next(let element):
+                print("next:", element)
+            case .error(let error):
+                print("error:", error)
+            case .completed:
+                print("completed")
+            }
+        }
+        
+        let disposable = observable.subscribe(observer)
+        
+        //        disposable.dispose()
+        
+        print("---------After testAsyncExample---------")
+        
     }
 }
