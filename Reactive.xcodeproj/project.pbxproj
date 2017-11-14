@@ -14,6 +14,10 @@
 		452EB9EE1FB3477800F7B04D /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9ED1FB3477800F7B04D /* Observable.swift */; };
 		452EB9F01FB3478700F7B04D /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9EF1FB3478700F7B04D /* Observer.swift */; };
 		452EB9F21FB3499900F7B04D /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9F11FB3499900F7B04D /* Disposable.swift */; };
+		452EB9F41FBB35D700F7B04D /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9F31FBB35D700F7B04D /* Scheduler.swift */; };
+		452EB9F71FBB399200F7B04D /* SchedulerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9F61FBB399200F7B04D /* SchedulerType.swift */; };
+		452EB9F91FBB39B100F7B04D /* DispatchQueueScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9F81FBB39B100F7B04D /* DispatchQueueScheduler.swift */; };
+		452EB9FB1FBB39C500F7B04D /* OperationQueueScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9FA1FBB39C500F7B04D /* OperationQueueScheduler.swift */; };
 		45BEB0581FB8068600989A06 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB0571FB8068600989A06 /* Map.swift */; };
 		45BEB05B1FB80E8E00989A06 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB05A1FB80E8E00989A06 /* MapTests.swift */; };
 		45BEB05D1FB813E000989A06 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB05C1FB813E000989A06 /* Merge.swift */; };
@@ -41,6 +45,10 @@
 		452EB9ED1FB3477800F7B04D /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		452EB9EF1FB3478700F7B04D /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		452EB9F11FB3499900F7B04D /* Disposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
+		452EB9F31FBB35D700F7B04D /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
+		452EB9F61FBB399200F7B04D /* SchedulerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulerType.swift; sourceTree = "<group>"; };
+		452EB9F81FBB39B100F7B04D /* DispatchQueueScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueScheduler.swift; sourceTree = "<group>"; };
+		452EB9FA1FBB39C500F7B04D /* OperationQueueScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueueScheduler.swift; sourceTree = "<group>"; };
 		45BEB0571FB8068600989A06 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		45BEB05A1FB80E8E00989A06 /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
 		45BEB05C1FB813E000989A06 /* Merge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merge.swift; sourceTree = "<group>"; };
@@ -112,8 +120,20 @@
 				45BEB0561FB8065600989A06 /* Operator */,
 				452EB9EF1FB3478700F7B04D /* Observer.swift */,
 				452EB9F11FB3499900F7B04D /* Disposable.swift */,
+				452EB9F51FBB397600F7B04D /* Scheduler */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		452EB9F51FBB397600F7B04D /* Scheduler */ = {
+			isa = PBXGroup;
+			children = (
+				452EB9F31FBB35D700F7B04D /* Scheduler.swift */,
+				452EB9F61FBB399200F7B04D /* SchedulerType.swift */,
+				452EB9F81FBB39B100F7B04D /* DispatchQueueScheduler.swift */,
+				452EB9FA1FBB39C500F7B04D /* OperationQueueScheduler.swift */,
+			);
+			path = Scheduler;
 			sourceTree = "<group>";
 		};
 		45BEB0561FB8065600989A06 /* Operator */ = {
@@ -245,11 +265,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				45BEB05D1FB813E000989A06 /* Merge.swift in Sources */,
+				452EB9F41FBB35D700F7B04D /* Scheduler.swift in Sources */,
 				452EB9EE1FB3477800F7B04D /* Observable.swift in Sources */,
 				45BEB0581FB8068600989A06 /* Map.swift in Sources */,
 				452EB9F21FB3499900F7B04D /* Disposable.swift in Sources */,
 				452EB9F01FB3478700F7B04D /* Observer.swift in Sources */,
 				4507D7581F656331001DCCE2 /* Event.swift in Sources */,
+				452EB9FB1FBB39C500F7B04D /* OperationQueueScheduler.swift in Sources */,
+				452EB9F71FBB399200F7B04D /* SchedulerType.swift in Sources */,
+				452EB9F91FBB39B100F7B04D /* DispatchQueueScheduler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
