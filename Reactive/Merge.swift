@@ -10,7 +10,7 @@ extension Observable {
     
     public static func merge(_ source0: Observable<E>, _ source1: Observable<E>) -> Observable<E> {
         
-        let _mergeProducer = Observable<E> { [source0, source1] observer in
+        return Observable<E> { [source0, source1] observer in
             
             var _completedCount = 0
             let increaseCompletedCount = { _completedCount += 1 }
@@ -38,7 +38,5 @@ extension Observable {
                 _sourceDisposer1.dispose()
             }
         }
-        
-        return _mergeProducer
     }
 }
