@@ -14,7 +14,13 @@
 		452EB9EE1FB3477800F7B04D /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9ED1FB3477800F7B04D /* Observable.swift */; };
 		452EB9F01FB3478700F7B04D /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9EF1FB3478700F7B04D /* Observer.swift */; };
 		452EB9F21FB3499900F7B04D /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9F11FB3499900F7B04D /* Disposable.swift */; };
-		45BEB0581FB8068600989A06 /* Observable+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB0571FB8068600989A06 /* Observable+Map.swift */; };
+		452EB9F41FBB35D700F7B04D /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9F31FBB35D700F7B04D /* Scheduler.swift */; };
+		4536E50D1FBC770E0023A086 /* SubscribeOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536E50C1FBC770E0023A086 /* SubscribeOn.swift */; };
+		4536E50F1FBC799E0023A086 /* SubscribeOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536E50E1FBC799E0023A086 /* SubscribeOnTests.swift */; };
+		45BEB0581FB8068600989A06 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB0571FB8068600989A06 /* Map.swift */; };
+		45BEB05B1FB80E8E00989A06 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB05A1FB80E8E00989A06 /* MapTests.swift */; };
+		45BEB05D1FB813E000989A06 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB05C1FB813E000989A06 /* Merge.swift */; };
+		45BEB05F1FB8171500989A06 /* MergeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB05E1FB8171500989A06 /* MergeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +44,13 @@
 		452EB9ED1FB3477800F7B04D /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		452EB9EF1FB3478700F7B04D /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		452EB9F11FB3499900F7B04D /* Disposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
-		45BEB0571FB8068600989A06 /* Observable+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Map.swift"; sourceTree = "<group>"; };
+		452EB9F31FBB35D700F7B04D /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
+		4536E50C1FBC770E0023A086 /* SubscribeOn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeOn.swift; sourceTree = "<group>"; };
+		4536E50E1FBC799E0023A086 /* SubscribeOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeOnTests.swift; sourceTree = "<group>"; };
+		45BEB0571FB8068600989A06 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		45BEB05A1FB80E8E00989A06 /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
+		45BEB05C1FB813E000989A06 /* Merge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merge.swift; sourceTree = "<group>"; };
+		45BEB05E1FB8171500989A06 /* MergeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +118,7 @@
 				45BEB0561FB8065600989A06 /* Operator */,
 				452EB9EF1FB3478700F7B04D /* Observer.swift */,
 				452EB9F11FB3499900F7B04D /* Disposable.swift */,
+				452EB9F31FBB35D700F7B04D /* Scheduler.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -113,7 +126,9 @@
 		45BEB0561FB8065600989A06 /* Operator */ = {
 			isa = PBXGroup;
 			children = (
-				45BEB0571FB8068600989A06 /* Observable+Map.swift */,
+				45BEB0571FB8068600989A06 /* Map.swift */,
+				45BEB05C1FB813E000989A06 /* Merge.swift */,
+				4536E50C1FBC770E0023A086 /* SubscribeOn.swift */,
 			);
 			name = Operator;
 			sourceTree = "<group>";
@@ -121,6 +136,9 @@
 		45BEB0591FB8071E00989A06 /* Operator */ = {
 			isa = PBXGroup;
 			children = (
+				45BEB05A1FB80E8E00989A06 /* MapTests.swift */,
+				45BEB05E1FB8171500989A06 /* MergeTests.swift */,
+				4536E50E1FBC799E0023A086 /* SubscribeOnTests.swift */,
 			);
 			path = Operator;
 			sourceTree = "<group>";
@@ -235,8 +253,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45BEB05D1FB813E000989A06 /* Merge.swift in Sources */,
+				452EB9F41FBB35D700F7B04D /* Scheduler.swift in Sources */,
 				452EB9EE1FB3477800F7B04D /* Observable.swift in Sources */,
-				45BEB0581FB8068600989A06 /* Observable+Map.swift in Sources */,
+				4536E50D1FBC770E0023A086 /* SubscribeOn.swift in Sources */,
+				45BEB0581FB8068600989A06 /* Map.swift in Sources */,
 				452EB9F21FB3499900F7B04D /* Disposable.swift in Sources */,
 				452EB9F01FB3478700F7B04D /* Observer.swift in Sources */,
 				4507D7581F656331001DCCE2 /* Event.swift in Sources */,
@@ -247,7 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45BEB05F1FB8171500989A06 /* MergeTests.swift in Sources */,
+				45BEB05B1FB80E8E00989A06 /* MapTests.swift in Sources */,
 				45124F331F655EF300A21AFA /* ReactiveTests.swift in Sources */,
+				4536E50F1FBC799E0023A086 /* SubscribeOnTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
