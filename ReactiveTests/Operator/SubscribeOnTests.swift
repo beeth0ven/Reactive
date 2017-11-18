@@ -39,7 +39,7 @@ class SubscribeOnTest: XCTestCase {
         }
         
         let disposable = source
-            .subscribeOn(.userInitiated)
+//            .subscribeOn(.userInitiated)
             .observeOn(.utility)
             .subscribe(observer)
 //            .dispose()

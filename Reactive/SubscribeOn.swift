@@ -12,7 +12,7 @@ extension Observable {
         
         return Observable { [source = self, scheduler] observer in
             let _disposer = Disposable()
-            scheduler.async {
+            scheduler.async { [source, observer, _disposer] in
                 let disposable = source.subscribe(observer)
                 _disposer.setDispose(disposable.dispose)
             }
@@ -26,8 +26,10 @@ extension Observable {
     public func observeOn(_ scheduler: Scheduler) -> Observable<E> {
         
         return Observable { [source = self, scheduler] observer in
-            let _sourceDisposer = source.subscribe(Observer { event in
-                scheduler.async { observer.on(event) }
+            let _sourceDisposer = source.subscribe(Observer { [scheduler, observer] event in
+                scheduler.async {
+                    observer.on(event)
+                }
             })
             return _sourceDisposer
         }
