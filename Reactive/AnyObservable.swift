@@ -6,17 +6,21 @@
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
-public class Observable<E> {
+//public typealias Observable<E> = AnyObservable<E>
+
+public class AnyObservable<Element>: ObservableType {
     
-    public let subscribe: (Observer<E>) -> Disposable
+    public typealias E = Element
     
-    public init(_ subscribe: @escaping (Observer<E>) -> Disposable) {
+    private let _subscribe: (AnyObserver<E>) -> Disposable
+    
+    public init(_ subscribe: @escaping (AnyObserver<E>) -> Disposable) {
         
-        self.subscribe = { [subscribe] observer in
+        _subscribe = { [subscribe] observer in
             
             let _disposer = Disposable()
 
-            let _disposable = subscribe(Observer { [observer] event in
+            let _disposable = subscribe(AnyObserver { [observer] event in
                 guard !_disposer.isDisposed else { return }
                 switch event {
                 case .next(let element):
@@ -33,6 +37,11 @@ public class Observable<E> {
             _disposer.setDispose(_disposable.dispose)
             return _disposer
         }
+    }
+    
+    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E {
+        let anyObserver = AnyObserver(observer.on)
+        return _subscribe(anyObserver)
     }
 }
 

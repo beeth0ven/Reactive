@@ -15,7 +15,7 @@ class ReactiveTests: XCTestCase {
         
         print("---------Before testSyncExample---------")
         
-        let observable = Observable<String> { observer in
+        let observable = AnyObservable<String> { observer in
             observer.on(.next("Sync 0"))
             observer.on(.next("Sync 1"))
             observer.on(.next("Sync 2"))
@@ -26,7 +26,7 @@ class ReactiveTests: XCTestCase {
             }
         }
         
-        let observer = Observer<String> { event in
+        let observer = AnyObserver<String> { event in
             switch event {
             case .next(let element):
                 print("next:", element)
@@ -49,7 +49,7 @@ class ReactiveTests: XCTestCase {
         
         print("---------Before testAsyncExample---------")
         
-        let observable = Observable<String> { observer in
+        let observable = AnyObservable<String> { observer in
             DispatchQueue.main.async {
                 print("---------Before testAsyncExample---------")
                 observer.on(.next("Async 0"))
@@ -64,7 +64,7 @@ class ReactiveTests: XCTestCase {
             }
         }
         
-        let observer = Observer<String> { event in
+        let observer = AnyObserver<String> { event in
             switch event {
             case .next(let element):
                 print("next:", element)

@@ -14,7 +14,7 @@ class MapTests: XCTestCase {
     func testExample() {
         print("---------Before testExample---------")
         
-        let observable = Observable<String> { observer in
+        let observable = AnyObservable<String> { observer in
             observer.on(.next("Element 0"))
             observer.on(.next("Element 1"))
             observer.on(.next("Element 2"))
@@ -28,7 +28,7 @@ class MapTests: XCTestCase {
         let transformed = observable
             .map { text in "Mapped " + text }
         
-        let observer = Observer<String> { event in
+        let observer = AnyObserver<String> { event in
             switch event {
             case .next(let element):
                 print("next:", element)

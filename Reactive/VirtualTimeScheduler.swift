@@ -6,25 +6,32 @@
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
-public struct VirtualTimeScheduler {
+public class VirtualTimeScheduler {
     
     public typealias VirtualTime = Int
     public typealias Task = () -> Void
+    public typealias ScheduledTask = (deadline: VirtualTime, task: Task)
     
     private var _clock: VirtualTime = 0
     private var _isRuning = false
-    private var _tasks: [(deadline: VirtualTime, task: Task)] = []
+    private var _scheduledTasks = SortedQueue<ScheduledTask>(sortBy: { $0.deadline < $1.deadline })
     
-    public mutating func schedule(at deadline: VirtualTime, task: @escaping Task) {
-        _tasks.append((deadline, task))
+    public func schedule(at deadline: VirtualTime, task: @escaping Task) {
+        _scheduledTasks.enqueue((deadline, task))
     }
     
-    public mutating func start() {
+    public func start() {
         guard !_isRuning else { return }
         _isRuning = true
-        _tasks
-            .sorted(by: { $0.deadline < $1.deadline })
-            .forEach { $0.task() }
+        
+        while let scheduledTask = _scheduledTasks.dequeue() {
+            guard _clock <= scheduledTask.deadline else {
+                fatalError("Schedule a task run at past time.")
+            }
+            _clock = scheduledTask.deadline
+            scheduledTask.task()
+        }
+        
         _isRuning = false
     }
 }

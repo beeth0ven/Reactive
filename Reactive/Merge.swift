@@ -6,17 +6,17 @@
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
-extension Observable {
+extension AnyObservable {
     
-    public static func merge(_ source0: Observable<E>, _ source1: Observable<E>) -> Observable<E> {
+    public static func merge(_ source0: AnyObservable<E>, _ source1: AnyObservable<E>) -> AnyObservable<E> {
         
-        return Observable<E> { [source0, source1] observer in
+        return AnyObservable<E> { [source0, source1] observer in
             
             var _completedCount = 0
             let increaseCompletedCount = { _completedCount += 1 }
             let allCompleted = { _completedCount == 2 }
             
-            let _mergeObserver = Observer<E> { [observer] event in
+            let _mergeObserver = AnyObserver<E> { [observer] event in
                 switch event {
                 case .next(let element):
                     observer.on(.next(element))
