@@ -12,3 +12,16 @@ public enum Event<E> {
     case completed
 }
 
+extension Event: CustomStringConvertible {
+    
+    public var description: String {
+        switch self {
+        case .next(let element):
+            return "next: \(element)"
+        case .error(let error):
+            return "error: \(error)"
+        case .completed:
+            return "completed"
+        }
+    }
+}

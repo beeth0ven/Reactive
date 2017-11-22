@@ -15,7 +15,7 @@ class SubscribeOnTest: XCTestCase {
 
         print("\(Thread.current.number) $: 0")
 
-        let source = Observable<String> { observer in
+        let source = AnyObservable<String> { observer in
             print("\(Thread.current.number) $: subscribeOn:")
             observer.on(.next("0"))
             observer.on(.next("1"))
@@ -27,7 +27,7 @@ class SubscribeOnTest: XCTestCase {
             }
         }
         
-        let observer = Observer<String> { event in
+        let observer = AnyObserver<String> { event in
             switch event {
             case .next(let element):
                 print("\(Thread.current.number) $: next:", element)

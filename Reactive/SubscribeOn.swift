@@ -6,11 +6,11 @@
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
-extension Observable {
+extension ObservableType {
     
-    public func subscribeOn(_ scheduler: Scheduler) -> Observable<E> {
+    public func subscribeOn(_ scheduler: Scheduler) -> AnyObservable<E> {
         
-        return Observable { [source = self, scheduler] observer in
+        return AnyObservable.create { [source = self, scheduler] observer in
             let _disposer = Disposable()
             scheduler.async { [source, observer, _disposer] in
                 let disposable = source.subscribe(observer)
@@ -21,12 +21,12 @@ extension Observable {
     }
 }
 
-extension Observable {
+extension ObservableType {
     
-    public func observeOn(_ scheduler: Scheduler) -> Observable<E> {
+    public func observeOn(_ scheduler: Scheduler) -> AnyObservable<E> {
         
-        return Observable { [source = self, scheduler] observer in
-            let _sourceDisposer = source.subscribe(Observer { [scheduler, observer] event in
+        return AnyObservable.create { [source = self, scheduler] observer in
+            let _sourceDisposer = source.subscribe(AnyObserver { [scheduler, observer] event in
                 scheduler.async {
                     observer.on(event)
                 }
