@@ -6,30 +6,21 @@
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
-public class PublishSubject<E> {
+public class PublishSubject<Element>: ObservableType, ObserverType {
+
+    public typealias E = Element
     
     private var _observers: Bag<AnyObserver<E>> = Bag()
     
-    public func subscribe(_ observer: AnyObserver<E>) -> Disposable {
-        return AnyObservable<E> { _observer in
-            let key = self._observers.insert(_observer)
-            return Disposable {
-                _ = self._observers.removeElement(for: key)
-            }
-        }.subscribe(observer)
+    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where E == O.E {
+        let anyObserver = AnyObserver(observer.on)
+        let key = _observers.insert(anyObserver)
+        return Disposable {
+            _ = self._observers.removeElement(for: key)
+        }
     }
     
     public func on(_ event: Event<E>) {
         _observers.forEach { $0.on(event) }
     }
-}
-
-public protocol ObserverType {
-    associatedtype E
-    func on(_ event: Event<E>)
-}
-
-public protocol ObservableType {
-    associatedtype E
-    func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E
 }

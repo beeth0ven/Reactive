@@ -8,6 +8,11 @@
 
 //public typealias Observable<E> = AnyObservable<E>
 
+public protocol ObservableType {
+    associatedtype E
+    func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E
+}
+
 public class AnyObservable<Element>: ObservableType {
     
     public typealias E = Element
@@ -15,11 +20,23 @@ public class AnyObservable<Element>: ObservableType {
     private let _subscribe: (AnyObserver<E>) -> Disposable
     
     public init(_ subscribe: @escaping (AnyObserver<E>) -> Disposable) {
+        _subscribe = subscribe
+    }
+    
+    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E {
+        let anyObserver = AnyObserver(observer.on)
+        return _subscribe(anyObserver)
+    }
+}
+
+extension AnyObservable {
+    
+    public static func create(_ subscribe: @escaping (AnyObserver<E>) -> Disposable) -> AnyObservable<E> {
         
-        _subscribe = { [subscribe] observer in
+        return AnyObservable { [subscribe] observer in
             
             let _disposer = Disposable()
-
+            
             let _disposable = subscribe(AnyObserver { [observer] event in
                 guard !_disposer.isDisposed else { return }
                 switch event {
@@ -38,11 +55,4 @@ public class AnyObservable<Element>: ObservableType {
             return _disposer
         }
     }
-    
-    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E {
-        let anyObserver = AnyObserver(observer.on)
-        return _subscribe(anyObserver)
-    }
 }
-
-

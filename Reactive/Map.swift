@@ -6,11 +6,11 @@
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
-extension AnyObservable {
+extension ObservableType {
     
     public func map<R>(_ transform: @escaping (E) -> R) -> AnyObservable<R> {
         
-        return AnyObservable<R> { [source = self, transform] observer in
+        return AnyObservable<R>.create { [source = self, transform] observer in
             
             let _sourceDisposer = source.subscribe(AnyObserver { [transform, observer] event in
                 switch event {

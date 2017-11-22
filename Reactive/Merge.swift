@@ -6,11 +6,11 @@
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
-extension AnyObservable {
+extension ObservableType {
     
-    public static func merge(_ source0: AnyObservable<E>, _ source1: AnyObservable<E>) -> AnyObservable<E> {
+    public static func merge<O: ObservableType, O1: ObservableType>(_ source0: O, _ source1: O1) -> AnyObservable<E> where O.E == E, O1.E == E {
         
-        return AnyObservable<E> { [source0, source1] observer in
+        return AnyObservable<E>.create { [source0, source1] observer in
             
             var _completedCount = 0
             let increaseCompletedCount = { _completedCount += 1 }

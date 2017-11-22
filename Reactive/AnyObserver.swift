@@ -6,6 +6,11 @@
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
+public protocol ObserverType {
+    associatedtype E
+    func on(_ event: Event<E>)
+}
+
 public class AnyObserver<Element>: ObserverType {
     
     public typealias E = Element

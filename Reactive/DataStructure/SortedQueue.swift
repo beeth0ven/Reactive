@@ -8,16 +8,16 @@
 
 struct SortedQueue<E> {
     
-    private let areInIncreasingOrder: (E, E) -> Bool
+    private let _areInIncreasingOrder: (E, E) -> Bool
     private var _elements = [E]()
     
     init(sortBy areInIncreasingOrder: @escaping (E, E) -> Bool) {
-        self.areInIncreasingOrder = areInIncreasingOrder
+        _areInIncreasingOrder = areInIncreasingOrder
     }
     
     mutating func enqueue(_ element: E) {
         _elements.append(element)
-        _elements.sort(by: areInIncreasingOrder)
+        _elements.sort(by: _areInIncreasingOrder)
     }
     
     mutating func dequeue() -> E? {
