@@ -12,7 +12,7 @@ public class VirtualTimeScheduler {
     public typealias Task = () -> Void
     public typealias ScheduledTask = (deadline: VirtualTime, task: Task)
     
-    private var _clock: VirtualTime = 0
+    public private(set) var clock: VirtualTime = 0
     private var _isRuning = false
     private var _scheduledTasks = SortedQueue<ScheduledTask>(sortBy: { $0.deadline < $1.deadline })
     
@@ -20,15 +20,19 @@ public class VirtualTimeScheduler {
         _scheduledTasks.enqueue((deadline, task))
     }
     
+    public func schedule(after interval: VirtualTime, task: @escaping Task) {
+        schedule(at: clock + interval, task: task)
+    }
+    
     public func start() {
         guard !_isRuning else { return }
         _isRuning = true
         
         while let scheduledTask = _scheduledTasks.dequeue() {
-            guard _clock <= scheduledTask.deadline else {
+            guard clock <= scheduledTask.deadline else {
                 fatalError("Schedule a task run at past time.")
             }
-            _clock = scheduledTask.deadline
+            clock = scheduledTask.deadline
             scheduledTask.task()
         }
         

@@ -7,9 +7,11 @@
 //
 
 import XCTest
+import ReactiveTest
 @testable import Reactive
 
-class ReactiveTests: XCTestCase {
+
+class Tests: XCTestCase {
     
     func testSyncExample() {
         
