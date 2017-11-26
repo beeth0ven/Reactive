@@ -23,7 +23,7 @@ class Tests: XCTestCase {
             observer.on(.next("Sync 2"))
             observer.on(.completed)
             observer.on(.next("Sync 3"))
-            return Disposable {
+            return Disposer {
                 print("Dispose")
             }
         }
@@ -61,7 +61,7 @@ class Tests: XCTestCase {
                 observer.on(.next("Async 3"))
                 print("---------After testAsyncExample---------")
             }
-            return Disposable {
+            return Disposer {
                 print("Dispose")
             }
         }

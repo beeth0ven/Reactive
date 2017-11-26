@@ -35,7 +35,7 @@ extension AnyObservable {
         
         return AnyObservable { [subscribe] observer in
             
-            let _disposer = Disposable()
+            let _disposer = Disposer()
             
             let _disposable = subscribe(AnyObserver { [observer] event in
                 guard !_disposer.isDisposed else { return }

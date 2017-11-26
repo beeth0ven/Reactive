@@ -27,6 +27,9 @@
 		452EB9F41FBB35D700F7B04D /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9F31FBB35D700F7B04D /* Scheduler.swift */; };
 		4536E50D1FBC770E0023A086 /* SubscribeOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536E50C1FBC770E0023A086 /* SubscribeOn.swift */; };
 		4536E50F1FBC799E0023A086 /* SubscribeOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536E50E1FBC799E0023A086 /* SubscribeOnTests.swift */; };
+		45965E971FCA81B6001DC0A0 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45965E961FCA81B6001DC0A0 /* Subscription.swift */; };
+		45965E991FCA828B001DC0A0 /* Event+Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45965E981FCA828B001DC0A0 /* Event+Equal.swift */; };
+		45965E9B1FCAB49F001DC0A0 /* HotObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45965E9A1FCAB49F001DC0A0 /* HotObservable.swift */; };
 		45BEB0581FB8068600989A06 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB0571FB8068600989A06 /* Map.swift */; };
 		45BEB05B1FB80E8E00989A06 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB05A1FB80E8E00989A06 /* MapTests.swift */; };
 		45BEB05D1FB813E000989A06 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB05C1FB813E000989A06 /* Merge.swift */; };
@@ -76,6 +79,9 @@
 		452EB9F31FBB35D700F7B04D /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
 		4536E50C1FBC770E0023A086 /* SubscribeOn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeOn.swift; sourceTree = "<group>"; };
 		4536E50E1FBC799E0023A086 /* SubscribeOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeOnTests.swift; sourceTree = "<group>"; };
+		45965E961FCA81B6001DC0A0 /* Subscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
+		45965E981FCA828B001DC0A0 /* Event+Equal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+Equal.swift"; sourceTree = "<group>"; };
+		45965E9A1FCAB49F001DC0A0 /* HotObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotObservable.swift; sourceTree = "<group>"; };
 		45BEB0571FB8068600989A06 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		45BEB05A1FB80E8E00989A06 /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
 		45BEB05C1FB813E000989A06 /* Merge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merge.swift; sourceTree = "<group>"; };
@@ -190,7 +196,10 @@
 				451CDA8A1FC859AE00AEFF6C /* DataStructure */,
 				451CDA5C1FC15C0500AEFF6C /* VirtualTimeScheduler.swift */,
 				451CDA8F1FC85FF400AEFF6C /* RecordedEvent.swift */,
+				45965E981FCA828B001DC0A0 /* Event+Equal.swift */,
 				451CDA911FC8620800AEFF6C /* RecordObserver.swift */,
+				45965E961FCA81B6001DC0A0 /* Subscription.swift */,
+				45965E9A1FCAB49F001DC0A0 /* HotObservable.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -404,10 +413,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45965E971FCA81B6001DC0A0 /* Subscription.swift in Sources */,
 				451CDA8D1FC859D300AEFF6C /* SortedQueue.swift in Sources */,
 				451CDA921FC8620800AEFF6C /* RecordObserver.swift in Sources */,
 				451CDA8E1FC859D700AEFF6C /* Bag.swift in Sources */,
+				45965E991FCA828B001DC0A0 /* Event+Equal.swift in Sources */,
 				451CDA901FC85FF400AEFF6C /* RecordedEvent.swift in Sources */,
+				45965E9B1FCAB49F001DC0A0 /* HotObservable.swift in Sources */,
 				451CDA881FC7199300AEFF6C /* VirtualTimeScheduler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

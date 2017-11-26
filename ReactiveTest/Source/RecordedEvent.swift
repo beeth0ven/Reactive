@@ -20,22 +20,18 @@ extension RecordedEvent: Equatable {
     }
 }
 
-func ==<E: Equatable>(_ lhs: Event<E>, _ rhs: Event<E>) -> Bool {
-    switch (lhs, rhs) {
-    case let(.next(lElement), .next(rElement)):
-        return lElement == rElement
-    case let(.error(lError), .error(rError)):
-        return lError == rError
-    case (.completed, .completed):
-        return true
-    default:
-        return false
+extension RecordedEvent {
+    
+    public static func next(_ time: VirtualTimeScheduler.VirtualTime, _ element: Element) -> RecordedEvent<Element> {
+        return RecordedEvent(time: time, event: .next(element))
     }
+    
+    public static func error(_ time: VirtualTimeScheduler.VirtualTime, _ error: Error) -> RecordedEvent<Element> {
+        return RecordedEvent(time: time, event: .error(error))
+    }
+    
+    public static func completed(_ time: VirtualTimeScheduler.VirtualTime) -> RecordedEvent<Element> {
+        return RecordedEvent(time: time, event: .completed)
+    }
+    
 }
-
-func ==(_ lhs: Error, _ rhs: Error) -> Bool {
-    let (lhs, rhs) = (lhs as NSError, rhs as NSError)
-    return lhs.domain == rhs.domain
-        && lhs.code == rhs.code
-}
-

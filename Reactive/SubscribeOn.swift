@@ -11,7 +11,7 @@ extension ObservableType {
     public func subscribeOn(_ scheduler: Scheduler) -> AnyObservable<E> {
         
         return AnyObservable.create { [source = self, scheduler] observer in
-            let _disposer = Disposable()
+            let _disposer = Disposer()
             scheduler.async { [source, observer, _disposer] in
                 let disposable = source.subscribe(observer)
                 _disposer.setDispose(disposable.dispose)

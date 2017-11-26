@@ -27,35 +27,77 @@ class VirtualTimeSchedulerTests: XCTestCase {
         testScheduler.start()
         
         XCTAssertEqual(observer.recordedEvents, [
-            RecordedEvent(time: 300, event: .next("300")),
-            RecordedEvent(time: 400, event: .next("400")),
-            RecordedEvent(time: 500, event: .next("500")),
-            RecordedEvent(time: 600, event: .completed),
-            RecordedEvent(time: 700, event: .next("700")),
+            .next(300, "300"),
+            .next(400, "400"),
+            .next(500, "500"),
+            .completed(600),
+            .next(700, "700")
             ])
-
     }
     
-    func testColdObservable() {
+    func testHotObservable() {
         
         let testScheduler = VirtualTimeScheduler()
-
-        let observable = AnyObservable<String>.create { observer in
-            testScheduler.schedule(after: 300) { observer.on(.next("300")) }
-            testScheduler.schedule(after: 400) { observer.on(.next("400")) }
-            testScheduler.schedule(after: 500) { observer.on(.next("500")) }
-            testScheduler.schedule(after: 600) { observer.on(.completed) }
-            testScheduler.schedule(after: 700) { observer.on(.next("700")) }
-            return Disposable()
-        }
+        
+        
+        let hotObservable = HotObservable(scheduler: testScheduler, recordedEvents: [
+            .next(300, "300"),
+            .next(400, "400"),
+            .next(500, "500"),
+            .completed(600),
+            .next(700, "700")
+            ])
         
         let observer = RecordObserver<String>(scheduler: testScheduler)
-
-        testScheduler.schedule(at: 200) { _ = observable.subscribe(observer) }
+        
+        var subscription: Subscription!
+        testScheduler.schedule(at: 200) { subscription = hotObservable.subscribe(observer) as! Subscription }
         testScheduler.start()
         
-        print("recordedEvents:", observer.recordedEvents)
-
+        XCTAssertEqual(observer.recordedEvents, [
+            .next(300, "300"),
+            .next(400, "400"),
+            .next(500, "500"),
+            .completed(600),
+            .next(700, "700")
+            ])
+        
+        print("subscription:", subscription.subscribeAt, subscription.disposeAt ?? "")
     }
+    
+//    func testColdObservable() {
+//
+//        let testScheduler = VirtualTimeScheduler()
+//        var subscription = Subscription()
+//
+//        let observable = AnyObservable<String>.create { observer in
+//            subscription.subscribeAt = testScheduler.clock
+//            testScheduler.schedule(after: 300) { observer.on(.next("300")) }
+//            testScheduler.schedule(after: 400) { observer.on(.next("400")) }
+//            testScheduler.schedule(after: 500) { observer.on(.next("500")) }
+//            testScheduler.schedule(after: 600) { observer.on(.completed) }
+//            testScheduler.schedule(after: 700) { observer.on(.next("700")) }
+//            return Disposable {
+//                subscription.disposeAt = testScheduler.clock
+//            }
+//        }
+//
+//        let observer = RecordObserver<String>(scheduler: testScheduler)
+//
+//        testScheduler.schedule(at: 200) { _ = observable.subscribe(observer) }
+//        testScheduler.start()
+//
+//        XCTAssertEqual(observer.recordedEvents, [
+//            .next(500, "300"),
+//            .next(600, "400"),
+//            .next(700, "500"),
+//            .completed(800)
+//            ])
+//
+//        XCTAssertEqual(subscription, Subscription(
+//            subscribeAt: 200,
+//            disposeAt: 800
+//        ))
+//    }
     
 }

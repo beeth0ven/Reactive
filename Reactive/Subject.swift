@@ -15,7 +15,7 @@ public class PublishSubject<Element>: ObservableType, ObserverType {
     public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where E == O.E {
         let anyObserver = AnyObserver(observer.on)
         let key = _observers.insert(anyObserver)
-        return Disposable {
+        return Disposer {
             _ = self._observers.removeElement(for: key)
         }
     }
