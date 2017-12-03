@@ -8,26 +8,14 @@
 
 import Reactive
 
-public class Subscription: Disposable {
+public struct Subscription {
     
     public let subscribeAt: VirtualTimeScheduler.VirtualTime
-    public private(set) var disposeAt: VirtualTimeScheduler.VirtualTime?
+    public let disposeAt: VirtualTimeScheduler.VirtualTime?
     
-    private let _scheduler: VirtualTimeScheduler
-    private var _isDisposed = false
-    private let _dispose: () -> Void
-
-    public init(scheduler: VirtualTimeScheduler, dispose: @escaping () -> Void = {}) {
-        _scheduler = scheduler
-        subscribeAt = scheduler.clock
-        _dispose = dispose
-    }
-    
-    public func dispose() {
-        guard !_isDisposed else { return }
-        _isDisposed = true
-        disposeAt = _scheduler.clock
-        _dispose()
+    init(subscribeAt: VirtualTimeScheduler.VirtualTime, disposeAt: VirtualTimeScheduler.VirtualTime? = nil) {
+        self.subscribeAt = subscribeAt
+        self.disposeAt = disposeAt
     }
 }
 
@@ -38,3 +26,23 @@ extension Subscription: Equatable {
     }
 }
 
+public struct Subscriptions {
+    
+    public private(set) var subscriptions: [Subscription] = []
+    private let _scheduler: VirtualTimeScheduler
+    
+    init(scheduler: VirtualTimeScheduler) {
+        _scheduler = scheduler
+    }
+    
+    public mutating func addNewSubscription() -> Int {
+        let index = subscriptions.endIndex
+        subscriptions.append(Subscription(subscribeAt: _scheduler.clock))
+        return index
+    }
+    
+    public mutating func dispose(atIndex index: Int) {
+        let subscription = subscriptions[index]
+        subscriptions[index] = Subscription(subscribeAt: subscription.subscribeAt, disposeAt: _scheduler.clock)
+    }
+}

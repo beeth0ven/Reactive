@@ -56,3 +56,10 @@ extension AnyObservable {
         }
     }
 }
+
+extension ObservableType {
+    
+    public func asObservable() -> AnyObservable<E> {
+        return AnyObservable.create(self.subscribe)
+    }
+}
