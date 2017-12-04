@@ -38,6 +38,10 @@ class VirtualTimeSchedulerTests: XCTestCase {
             .completed(600)
             ])
         
+        XCTAssertEqual(hotObservable.subscriptions, [
+            Subscription(200, 600)
+            ])
+        
         print("-- subscriptions:", hotObservable.subscriptions)
     }
     
@@ -64,6 +68,10 @@ class VirtualTimeSchedulerTests: XCTestCase {
             .next(600, "+400"),
             .next(700, "+500"),
             .completed(800)
+            ])
+        
+        XCTAssertEqual(coldObservable.subscriptions, [
+            Subscription(200, 800)
             ])
         
         print("-- subscriptions:", coldObservable.subscriptions)

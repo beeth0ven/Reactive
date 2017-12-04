@@ -18,7 +18,7 @@ public class HotObservable<Element: Equatable>: ObservableType {
     
     public init(scheduler: VirtualTimeScheduler, recordedEvents: [RecordedEvent<E>]) {
         _scheduler = scheduler
-        subscriptions = Subscriptions(scheduler: _scheduler)
+        subscriptions = Subscriptions()
         recordedEvents.forEach(schedule)
     }
     
@@ -33,10 +33,10 @@ public class HotObservable<Element: Equatable>: ObservableType {
     public func subscribe<O>(_ observer: O) -> Disposable where O : ObserverType, Element == O.E {
         let anyObserver = AnyObserver(observer.on)
         let key = _observers.insert(anyObserver)
-        let index = subscriptions.addNewSubscription()
-        return Disposer {
+        let index = subscriptions.addNewSubscription(atTime: _scheduler.clock)
+        return Disposer { [_scheduler] in
             _ = self._observers.removeElement(for: key)
-            self.subscriptions.dispose(atIndex: index)
+            self.subscriptions.dispose(atIndex: index, atTime: _scheduler.clock)
         }
     }
 }
@@ -51,7 +51,7 @@ public class ColdObservable<Element: Equatable>: ObservableType {
     public init(sheduler: VirtualTimeScheduler, recordedEvents: [RecordedEvent<E>]) {
         _scheduler = sheduler
         _recordedEvents = recordedEvents
-        subscriptions = Subscriptions(scheduler: _scheduler)
+        subscriptions = Subscriptions()
     }
     
     public func subscribe<O>(_ observer: O) -> Disposable where O : ObserverType, Element == O.E {
@@ -62,10 +62,10 @@ public class ColdObservable<Element: Equatable>: ObservableType {
                 observer.on(recordedEvent.event)
             }
         }
-        let index = subscriptions.addNewSubscription()
-        return Disposer {
+        let index = subscriptions.addNewSubscription(atTime: _scheduler.clock)
+        return Disposer { [_scheduler] in
             isDisposed = true
-            self.subscriptions.dispose(atIndex: index)
+            self.subscriptions.dispose(atIndex: index, atTime: _scheduler.clock)
         }
     }
 }
