@@ -41,8 +41,6 @@ class VirtualTimeSchedulerTests: XCTestCase {
         XCTAssertEqual(hotObservable.subscriptions, [
             Subscription(200, 600)
             ])
-        
-        print("-- subscriptions:", hotObservable.subscriptions)
     }
     
     func testColdObservable() {
@@ -73,7 +71,5 @@ class VirtualTimeSchedulerTests: XCTestCase {
         XCTAssertEqual(coldObservable.subscriptions, [
             Subscription(200, 800)
             ])
-        
-        print("-- subscriptions:", coldObservable.subscriptions)
     }
 }
