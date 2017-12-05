@@ -20,7 +20,7 @@ class MapTests: XCTestCase {
             observer.on(.next("Element 2"))
             observer.on(.completed)
             observer.on(.next("Element 3"))
-            return Disposable {
+            return Disposer {
                 print("Dispose")
             }
         }

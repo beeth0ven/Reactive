@@ -19,7 +19,7 @@ class MergeTests: XCTestCase {
             observer.on(.next("Source0 2"))
             observer.on(.completed)
             observer.on(.next("Source0 3"))
-            return Disposable {
+            return Disposer {
                 print("$: Dispose Source0")
             }
         }
@@ -30,7 +30,7 @@ class MergeTests: XCTestCase {
             observer.on(.next("source1 2"))
             observer.on(.completed)
             observer.on(.next("source1 3"))
-            return Disposable {
+            return Disposer {
                 print("$: Dispose source1")
             }
         }

@@ -22,7 +22,7 @@ class SubscribeOnTest: XCTestCase {
             observer.on(.next("2"))
             observer.on(.completed)
             observer.on(.next("3"))
-            return Disposable {
+            return Disposer {
                 print("\(Thread.current.number) $: Dispose")
             }
         }

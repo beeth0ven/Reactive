@@ -6,7 +6,11 @@
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
-public class Disposable {
+public protocol Disposable {
+    func dispose()
+}
+
+public class Disposer: Disposable {
     
     public var isDisposed = false
     private var _dispose: () -> Void

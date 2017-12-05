@@ -27,6 +27,11 @@
 		452EB9F41FBB35D700F7B04D /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452EB9F31FBB35D700F7B04D /* Scheduler.swift */; };
 		4536E50D1FBC770E0023A086 /* SubscribeOn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536E50C1FBC770E0023A086 /* SubscribeOn.swift */; };
 		4536E50F1FBC799E0023A086 /* SubscribeOnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4536E50E1FBC799E0023A086 /* SubscribeOnTests.swift */; };
+		457CD4F51FD5967A00135068 /* Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457CD4F41FD5967A00135068 /* Subscriptions.swift */; };
+		457CD4F81FD6D84300135068 /* ColdObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457CD4F71FD6D84300135068 /* ColdObservable.swift */; };
+		45965E971FCA81B6001DC0A0 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45965E961FCA81B6001DC0A0 /* Subscription.swift */; };
+		45965E991FCA828B001DC0A0 /* Event+Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45965E981FCA828B001DC0A0 /* Event+Equal.swift */; };
+		45965E9B1FCAB49F001DC0A0 /* HotObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45965E9A1FCAB49F001DC0A0 /* HotObservable.swift */; };
 		45BEB0581FB8068600989A06 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB0571FB8068600989A06 /* Map.swift */; };
 		45BEB05B1FB80E8E00989A06 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB05A1FB80E8E00989A06 /* MapTests.swift */; };
 		45BEB05D1FB813E000989A06 /* Merge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BEB05C1FB813E000989A06 /* Merge.swift */; };
@@ -76,6 +81,11 @@
 		452EB9F31FBB35D700F7B04D /* Scheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
 		4536E50C1FBC770E0023A086 /* SubscribeOn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeOn.swift; sourceTree = "<group>"; };
 		4536E50E1FBC799E0023A086 /* SubscribeOnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeOnTests.swift; sourceTree = "<group>"; };
+		457CD4F41FD5967A00135068 /* Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscriptions.swift; sourceTree = "<group>"; };
+		457CD4F71FD6D84300135068 /* ColdObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColdObservable.swift; sourceTree = "<group>"; };
+		45965E961FCA81B6001DC0A0 /* Subscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
+		45965E981FCA828B001DC0A0 /* Event+Equal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+Equal.swift"; sourceTree = "<group>"; };
+		45965E9A1FCAB49F001DC0A0 /* HotObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotObservable.swift; sourceTree = "<group>"; };
 		45BEB0571FB8068600989A06 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		45BEB05A1FB80E8E00989A06 /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
 		45BEB05C1FB813E000989A06 /* Merge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merge.swift; sourceTree = "<group>"; };
@@ -190,7 +200,12 @@
 				451CDA8A1FC859AE00AEFF6C /* DataStructure */,
 				451CDA5C1FC15C0500AEFF6C /* VirtualTimeScheduler.swift */,
 				451CDA8F1FC85FF400AEFF6C /* RecordedEvent.swift */,
+				45965E981FCA828B001DC0A0 /* Event+Equal.swift */,
 				451CDA911FC8620800AEFF6C /* RecordObserver.swift */,
+				45965E961FCA81B6001DC0A0 /* Subscription.swift */,
+				457CD4F41FD5967A00135068 /* Subscriptions.swift */,
+				45965E9A1FCAB49F001DC0A0 /* HotObservable.swift */,
+				457CD4F71FD6D84300135068 /* ColdObservable.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -404,10 +419,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				457CD4F51FD5967A00135068 /* Subscriptions.swift in Sources */,
+				45965E971FCA81B6001DC0A0 /* Subscription.swift in Sources */,
+				457CD4F81FD6D84300135068 /* ColdObservable.swift in Sources */,
 				451CDA8D1FC859D300AEFF6C /* SortedQueue.swift in Sources */,
 				451CDA921FC8620800AEFF6C /* RecordObserver.swift in Sources */,
 				451CDA8E1FC859D700AEFF6C /* Bag.swift in Sources */,
+				45965E991FCA828B001DC0A0 /* Event+Equal.swift in Sources */,
 				451CDA901FC85FF400AEFF6C /* RecordedEvent.swift in Sources */,
+				45965E9B1FCAB49F001DC0A0 /* HotObservable.swift in Sources */,
 				451CDA881FC7199300AEFF6C /* VirtualTimeScheduler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -552,6 +572,7 @@
 				INFOPLIST_FILE = Reactive/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=100 -Xfrontend -warn-long-function-bodies=100";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.beeth0ven.Reactive;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -593,6 +614,7 @@
 				DEVELOPMENT_TEAM = 6BDKUNMM63;
 				INFOPLIST_FILE = ReactiveTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=100 -Xfrontend -warn-long-function-bodies=100";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.beeth0ven.ReactiveTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -629,6 +651,7 @@
 				INFOPLIST_FILE = ReactiveTest/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.beeth0ven.ReactiveTest.ReactiveTest;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -652,6 +675,7 @@
 				INFOPLIST_FILE = ReactiveTest/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.beeth0ven.ReactiveTest.ReactiveTest;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

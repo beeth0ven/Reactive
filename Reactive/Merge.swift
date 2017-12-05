@@ -33,7 +33,7 @@ extension ObservableType {
             let _sourceDisposer0 = source0.subscribe(_mergeObserver)
             let _sourceDisposer1 = source1.subscribe(_mergeObserver)
             
-            return Disposable {
+            return Disposer {
                 _sourceDisposer0.dispose()
                 _sourceDisposer1.dispose()
             }
