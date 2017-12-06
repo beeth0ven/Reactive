@@ -16,6 +16,8 @@ public class VirtualTimeScheduler {
     private var _isRuning = false
     private var _scheduledTasks = SortedQueue<ScheduledTask>(sortBy: { $0.deadline < $1.deadline })
     
+    public init() {}
+    
     public func schedule(at deadline: VirtualTime, task: @escaping Task) {
         _scheduledTasks.enqueue((deadline, task))
     }

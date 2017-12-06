@@ -13,75 +13,35 @@ import ReactiveTest
 
 class Tests: XCTestCase {
     
-    func testSyncExample() {
+    func test() {
         
-        print("---------Before testSyncExample---------")
+        let scheduler = VirtualTimeScheduler()
+
+        let observable = HotObservable(scheduler: scheduler, recordedEvents: [
+            .next(300, 0),
+            .next(400, 1),
+            .next(500, 2),
+            .completed(600),
+            .next(700, 0),
+            ])
         
-        let observable = AnyObservable<String> { observer in
-            observer.on(.next("Sync 0"))
-            observer.on(.next("Sync 1"))
-            observer.on(.next("Sync 2"))
-            observer.on(.completed)
-            observer.on(.next("Sync 3"))
-            return Disposer {
-                print("Dispose")
-            }
+        let observer = RecordObserver<Int>(scheduler: scheduler)
+        
+        scheduler.schedule(at: 200) {
+            _ = observable.asObservable().subscribe(observer)
         }
+        scheduler.start()
         
-        let observer = AnyObserver<String> { event in
-            switch event {
-            case .next(let element):
-                print("next:", element)
-            case .error(let error):
-                print("error:", error)
-            case .completed:
-                print("completed")
-            }
-        }
+        XCTAssertEqual(observer.recordedEvents, [
+            .next(300, 0),
+            .next(400, 1),
+            .next(500, 2),
+            .completed(600),
+            ])
         
-        let disposable = observable.subscribe(observer)
-        
-        //        disposable.dispose()
-        
-        print("---------After testSyncExample---------")
-        
-    }
-    
-    func testAsyncExample() {
-        
-        print("---------Before testAsyncExample---------")
-        
-        let observable = AnyObservable<String> { observer in
-            DispatchQueue.main.async {
-                print("---------Before testAsyncExample---------")
-                observer.on(.next("Async 0"))
-                observer.on(.next("Async 1"))
-                observer.on(.next("Async 2"))
-                observer.on(.completed)
-                observer.on(.next("Async 3"))
-                print("---------After testAsyncExample---------")
-            }
-            return Disposer {
-                print("Dispose")
-            }
-        }
-        
-        let observer = AnyObserver<String> { event in
-            switch event {
-            case .next(let element):
-                print("next:", element)
-            case .error(let error):
-                print("error:", error)
-            case .completed:
-                print("completed")
-            }
-        }
-        
-        let disposable = observable.subscribe(observer)
-        
-        //        disposable.dispose()
-        
-        print("---------After testAsyncExample---------")
+        XCTAssertEqual(observable.subscriptions, [
+            Subscription(200, 600)
+            ])
         
     }
 }

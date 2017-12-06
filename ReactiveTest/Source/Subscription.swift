@@ -13,7 +13,7 @@ public struct Subscription {
     public let subscribeAt: VirtualTimeScheduler.VirtualTime
     public let disposeAt: VirtualTimeScheduler.VirtualTime?
     
-    init(_ subscribeAt: VirtualTimeScheduler.VirtualTime, _ disposeAt: VirtualTimeScheduler.VirtualTime? = nil) {
+    public init(_ subscribeAt: VirtualTimeScheduler.VirtualTime, _ disposeAt: VirtualTimeScheduler.VirtualTime? = nil) {
         self.subscribeAt = subscribeAt
         self.disposeAt = disposeAt
     }
