@@ -7,40 +7,41 @@
 //
 
 import XCTest
+import ReactiveTest
 @testable import Reactive
 
 class MapTests: XCTestCase {
     
     func testExample() {
-        print("---------Before testExample---------")
         
-        let observable = AnyObservable<String> { observer in
-            observer.on(.next("Element 0"))
-            observer.on(.next("Element 1"))
-            observer.on(.next("Element 2"))
-            observer.on(.completed)
-            observer.on(.next("Element 3"))
-            return Disposer {
-                print("Dispose")
-            }
+        let scheduler = VirtualTimeScheduler()
+        
+        let observable = HotObservable(scheduler: scheduler, recordedEvents: [
+            .next(300, 0),
+            .next(400, 1),
+            .next(500, 2),
+            .completed(600),
+            .next(700, 0),
+            ])
+        
+        let observer = RecordObserver<Int>(scheduler: scheduler)
+        
+        scheduler.schedule(at: 200) {
+            _ = observable.asObservable()
+                .map { $0 * 2 }
+                .subscribe(observer)
         }
+        scheduler.start()
         
-        let transformed = observable
-            .map { text in "Mapped " + text }
+        XCTAssertEqual(observer.recordedEvents, [
+            .next(300, 0 * 2),
+            .next(400, 1 * 2),
+            .next(500, 2 * 2),
+            .completed(600)
+            ])
         
-        let observer = AnyObserver<String> { event in
-            switch event {
-            case .next(let element):
-                print("next:", element)
-            case .error(let error):
-                print("error:", error)
-            case .completed:
-                print("completed")
-            }
-        }
-        
-        let disposable = transformed.subscribe(observer)
-        
-        print("---------After testSyncExample---------")
+        XCTAssertEqual(observable.subscriptions, [
+            Subscription(200, 600)
+            ])
     }
 }

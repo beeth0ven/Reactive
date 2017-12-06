@@ -7,48 +7,57 @@
 //
 
 import XCTest
+import ReactiveTest
 @testable import Reactive
 
 class MergeTests: XCTestCase {
     
     func testExample() {
         
-        let source0 = AnyObservable<String> { observer in
-            observer.on(.next("Source0 0"))
-            observer.on(.next("Source0 1"))
-            observer.on(.next("Source0 2"))
-            observer.on(.completed)
-            observer.on(.next("Source0 3"))
-            return Disposer {
-                print("$: Dispose Source0")
-            }
+        let scheduler = VirtualTimeScheduler()
+        
+        let source0 = HotObservable(scheduler: scheduler, recordedEvents: [
+            .next(300, 0),
+            .next(400, 1),
+            .next(500, 2),
+            .completed(600),
+            .next(700, 0),
+            ])
+        
+        let source1 = HotObservable(scheduler: scheduler, recordedEvents: [
+            .next(350, 10),
+            .next(450, 11),
+            .next(550, 12),
+            .completed(650),
+            .next(750, 0),
+            ])
+        
+        let observer = RecordObserver<Int>(scheduler: scheduler)
+        
+        scheduler.schedule(at: 200) {
+            _ = AnyObservable.merge(
+                source0.asObservable(),
+                source1.asObservable()
+                ).subscribe(observer)
         }
+        scheduler.start()
         
-        let source1 = AnyObservable<String> { observer in
-            observer.on(.next("source1 0"))
-            observer.on(.next("source1 1"))
-            observer.on(.next("source1 2"))
-            observer.on(.completed)
-            observer.on(.next("source1 3"))
-            return Disposer {
-                print("$: Dispose source1")
-            }
-        }
+        XCTAssertEqual(observer.recordedEvents, [
+            .next(300, 0),
+            .next(350, 10),
+            .next(400, 1),
+            .next(450, 11),
+            .next(500, 2),
+            .next(550, 12),
+            .completed(650),
+            ])
         
-        let merged = AnyObservable.merge(source0, source1)
+        XCTAssertEqual(source0.subscriptions, [
+            Subscription(200, 600)
+            ])
         
-        let observer = AnyObserver<String> { event in
-            switch event {
-            case .next(let element):
-                print("$: next:", element)
-            case .error(let error):
-                print("$: error:", error)
-            case .completed:
-                print("$: completed")
-            }
-        }
-        
-        let disposable = merged.subscribe(observer)
-        
+        XCTAssertEqual(source1.subscriptions, [
+            Subscription(200, 650)
+            ])
     }
 }

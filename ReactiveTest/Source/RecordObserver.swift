@@ -14,7 +14,7 @@ public class RecordObserver<Element: Equatable>: ObserverType {
     public private(set) var recordedEvents: [RecordedEvent<E>] = []
     private let _scheduler: VirtualTimeScheduler
     
-    init(scheduler: VirtualTimeScheduler) {
+    public init(scheduler: VirtualTimeScheduler) {
         _scheduler = scheduler
     }
     
