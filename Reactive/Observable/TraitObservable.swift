@@ -13,5 +13,9 @@ public struct TraitObservable<Trait, E> {
     public init(raw: AnyObservable<E>) {
         self.raw = raw
     }
+    
+    public init<Observable: ObservableType>(source: Observable) where Observable.Element == E {
+        self.raw = AnyObservable(source)
+    }
 }
 

@@ -10,7 +10,7 @@
 
 public protocol ObservableType {
     associatedtype Element
-    func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.Element == Element
+    func subscribe<Observer: ObserverType>(_ observer: Observer) -> Disposable where Observer.Element == Element
 }
 
 public class AnyObservable<E>: ObservableType {
@@ -23,7 +23,11 @@ public class AnyObservable<E>: ObservableType {
         _subscribe = subscribe
     }
     
-    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.Element == E {
+    public init<Observable: ObservableType>(_ source: Observable) where Observable.Element == E {
+        _subscribe = source.subscribe
+    }
+    
+    public func subscribe<Observer: ObserverType>(_ observer: Observer) -> Disposable where Observer.Element == E {
         let anyObserver = AnyObserver(observer.on)
         return _subscribe(anyObserver)
     }
