@@ -8,7 +8,7 @@
 
 extension ObservableType {
     
-    public func subscribeOn(_ scheduler: Scheduler) -> AnyObservable<E> {
+    public func subscribeOn(_ scheduler: Scheduler) -> AnyObservable<Element> {
         
         return AnyObservable.create { [source = self, scheduler] observer in
             let _disposer = Disposer()
@@ -23,7 +23,7 @@ extension ObservableType {
 
 extension ObservableType {
     
-    public func observeOn(_ scheduler: Scheduler) -> AnyObservable<E> {
+    public func observeOn(_ scheduler: Scheduler) -> AnyObservable<Element> {
         
         return AnyObservable.create { [source = self, scheduler] observer in
             let _sourceDisposer = source.subscribe(AnyObserver { [scheduler, observer] event in

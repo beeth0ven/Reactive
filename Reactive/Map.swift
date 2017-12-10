@@ -8,7 +8,7 @@
 
 extension ObservableType {
     
-    public func map<R>(_ transform: @escaping (E) -> R) -> AnyObservable<R> {
+    public func map<R>(_ transform: @escaping (Element) -> R) -> AnyObservable<R> {
         
         return AnyObservable<R>.create { [source = self, transform] observer in
             

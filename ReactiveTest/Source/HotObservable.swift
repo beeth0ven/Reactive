@@ -8,9 +8,9 @@
 
 import Reactive
 
-public class HotObservable<Element: Equatable>: ObservableType {
+public class HotObservable<E: Equatable>: ObservableType {
     
-    public typealias E = Element
+    public typealias Element = E
     
     private let _scheduler: VirtualTimeScheduler
     private var _observers: Bag<AnyObserver<E>> = Bag()
@@ -30,7 +30,7 @@ public class HotObservable<Element: Equatable>: ObservableType {
         _observers.forEach { $0.on(event) }
     }
     
-    public func subscribe<O>(_ observer: O) -> Disposable where O : ObserverType, Element == O.E {
+    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where E == O.Element {
         let anyObserver = AnyObserver(observer.on)
         let key = _observers.insert(anyObserver)
         let index = subscriptions.addNewSubscription(atTime: _scheduler.clock)

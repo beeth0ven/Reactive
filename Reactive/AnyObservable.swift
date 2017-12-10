@@ -9,13 +9,13 @@
 //public typealias Observable<E> = AnyObservable<E>
 
 public protocol ObservableType {
-    associatedtype E
-    func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E
+    associatedtype Element
+    func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.Element == Element
 }
 
-public class AnyObservable<Element>: ObservableType {
+public class AnyObservable<E>: ObservableType {
     
-    public typealias E = Element
+    public typealias Element = E
     
     private let _subscribe: (AnyObserver<E>) -> Disposable
     
@@ -23,7 +23,7 @@ public class AnyObservable<Element>: ObservableType {
         _subscribe = subscribe
     }
     
-    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E {
+    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.Element == E {
         let anyObserver = AnyObserver(observer.on)
         return _subscribe(anyObserver)
     }
@@ -59,7 +59,7 @@ extension AnyObservable {
 
 extension ObservableType {
     
-    public func asObservable() -> AnyObservable<E> {
+    public func asObservable() -> AnyObservable<Element> {
         return AnyObservable.create(self.subscribe)
     }
 }
