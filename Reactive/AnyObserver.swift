@@ -7,13 +7,13 @@
 //
 
 public protocol ObserverType {
-    associatedtype E
-    func on(_ event: Event<E>)
+    associatedtype Element
+    func on(_ event: Event<Element>)
 }
 
-public class AnyObserver<Element>: ObserverType {
+public class AnyObserver<E>: ObserverType {
     
-    public typealias E = Element
+    public typealias Element = E
     
     private let _on: (Event<E>) -> Void
     

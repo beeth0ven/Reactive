@@ -8,9 +8,9 @@
 
 import Reactive
 
-public class ColdObservable<Element: Equatable>: ObservableType {
+public class ColdObservable<E: Equatable>: ObservableType {
     
-    public typealias E = Element
+    public typealias Element = E
     private let _scheduler: VirtualTimeScheduler
     private let _recordedEvents: [RecordedEvent<E>]
     public private(set) var subscriptions: Subscriptions
@@ -21,7 +21,7 @@ public class ColdObservable<Element: Equatable>: ObservableType {
         subscriptions = Subscriptions()
     }
     
-    public func subscribe<O>(_ observer: O) -> Disposable where O : ObserverType, Element == O.E {
+    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where E == O.Element {
         var isDisposed = false
         _recordedEvents.forEach { recordedEvent in
             _scheduler.schedule(after: recordedEvent.time) {

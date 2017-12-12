@@ -8,15 +8,15 @@
 
 extension ObservableType {
     
-    public static func merge<O: ObservableType, O1: ObservableType>(_ source0: O, _ source1: O1) -> AnyObservable<E> where O.E == E, O1.E == E {
+    public static func merge<O: ObservableType, O1: ObservableType>(_ source0: O, _ source1: O1) -> AnyObservable<Element> where O.Element == Element, O1.Element == Element {
         
-        return AnyObservable<E>.create { [source0, source1] observer in
+        return AnyObservable<Element>.create { [source0, source1] observer in
             
             var _completedCount = 0
             let increaseCompletedCount = { _completedCount += 1 }
             let allCompleted = { _completedCount == 2 }
             
-            let _mergeObserver = AnyObserver<E> { [observer] event in
+            let _mergeObserver = AnyObserver<Element> { [observer] event in
                 switch event {
                 case .next(let element):
                     observer.on(.next(element))
