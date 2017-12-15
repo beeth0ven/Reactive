@@ -10,6 +10,11 @@ import XCTest
 import ReactiveTest
 @testable import Reactive
 
+struct TestError: Error {
+    let message: String
+}
+
+let testError = TestError(message: "testError")
 
 class Tests: XCTestCase {
     

@@ -1,23 +1,25 @@
 //
-//  Observable+Map.swift
+//  Filter.swift
 //  Reactive
 //
-//  Created by luojie on 2017/11/12.
+//  Created by luojie on 2017/12/15.
 //  Copyright © 2017年 LuoJie. All rights reserved.
 //
 
 extension ObservableType {
     
-    public func map<R>(_ transform: @escaping (Element) throws -> R) -> AnyObservable<R> {
+    public func filter(_ predicate: @escaping (Element) throws -> Bool) -> AnyObservable<Element> {
         
-        return AnyObservable<R>.create { [source = self, transform] observer in
+        return AnyObservable.create { [source = self, predicate] observer in
             
-            let _sourceDisposer = source.subscribe(AnyObserver { [transform, observer] event in
+            let sourceDisposer = source.subscribe(AnyObserver { [predicate, observer] event in
                 switch event {
                 case .next(let element):
                     do {
-                        let mappedElement = try transform(element)
-                        observer.on(.next(mappedElement))
+                        let shouldEmmit = try predicate(element)
+                        if shouldEmmit {
+                            observer.on(.next(element))
+                        }
                     } catch {
                         observer.on(.error(error))
                     }
@@ -28,8 +30,7 @@ extension ObservableType {
                 }
             })
             
-            return _sourceDisposer
+            return sourceDisposer
         }
     }
 }
-
