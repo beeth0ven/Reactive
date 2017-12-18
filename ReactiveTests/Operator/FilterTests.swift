@@ -87,4 +87,42 @@ class FilterTests: XCTestCase {
             Subscription(200, 800)
             ])
     }
+    
+    func testAllTrue() {
+        
+        let scheduler = VirtualTimeScheduler()
+        
+        let hotObservable = HotObservable(scheduler: scheduler, recordedEvents: [
+            .next(100, 15),
+            .next(250, 30),
+            .next(300, 55),
+            .next(350, 75),
+            .next(450, 80),
+            .next(550, 35),
+            .next(600, 95),
+            .completed(800),
+            .error(900, testError),
+            ])
+        
+        let observer = RecordObserver<Int>(scheduler: scheduler)
+        
+        scheduler.schedule(at: 200) {
+            _ = hotObservable.filter { x in true } .subscribe(observer)
+        }
+        scheduler.start()
+        
+        XCTAssertEqual(observer.recordedEvents, [
+            .next(250, 30),
+            .next(300, 55),
+            .next(350, 75),
+            .next(450, 80),
+            .next(550, 35),
+            .next(600, 95),
+            .completed(800),
+            ])
+        
+        XCTAssertEqual(hotObservable.subscriptions, [
+            Subscription(200, 800)
+            ])
+    }
 }
